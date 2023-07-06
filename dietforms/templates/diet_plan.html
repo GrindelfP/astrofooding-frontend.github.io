@@ -5,10 +5,11 @@
         {{ form.as_p }}
         <button type="submit">Submit</button>
     </form>
-    
+
     {% if diet_plan %}
-        <h1>{{ diet_plan.astronaut.name }}'s Optimal Diet Plan:</h1>
-        <h2>Macronutrients:</h2>
+        <h1>Astronaut's {{ diet_plan.astronaut.name }} Space-Diet Plan:</h1>
+
+        <h3>{{ diet_plan.astronaut.name }}'s required amounts of macronutrients:</h3>
         <p>Calories: {{ diet_plan.macronutrients.calories }}</p>
         <p>Protein: {{ diet_plan.macronutrients.protein }}</p>
         <p>Fat: {{ diet_plan.macronutrients.fat }}</p>
@@ -16,7 +17,23 @@
 
         <h2>Meals:</h2>
         {% for meal in diet_plan.mealsByQuantity %}
-            <p>{{ meal.meal.name }}: {{ meal.quantity }}</p>
+            <h4>
+                {{ meal.meal.name }}: {{ meal.quantity }} servings.
+            </h4>
+            <p>
+                That is equal to {{ meal.meal.protein }} proteins,
+                {{ meal.meal.fat }}, fats and {{ meal.meal.carbs }} carbs.
+            </p>
+            <div></div>
         {% endfor %}
+
+        <h2>Total Meal Macronutrients:</h2>
+        <p>Protein: {{ total_protein }}</p>
+        <p>Fat: {{ total_fat }}</p>
+        <p>Carbs: {{ total_carbs }}</p>
+
+        <h2>Total Meals Weight (grams):</h2>
+        <p>{{ total_weight }}</p>
+
     {% endif %}
 {% endblock %}
