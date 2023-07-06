@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form method="get">
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+    
+    {% if diet_plan %}
+        <h1>{{ diet_plan.astronaut.name }}'s Optimal Diet Plan:</h1>
+        <h2>Macronutrients:</h2>
+        <p>Calories: {{ diet_plan.macronutrients.calories }}</p>
+        <p>Protein: {{ diet_plan.macronutrients.protein }}</p>
+        <p>Fat: {{ diet_plan.macronutrients.fat }}</p>
+        <p>Carbs: {{ diet_plan.macronutrients.carbs }}</p>
+
+        <h2>Meals:</h2>
+        {% for meal in diet_plan.mealsByQuantity %}
+            <p>{{ meal.meal.name }}: {{ meal.quantity }}</p>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
